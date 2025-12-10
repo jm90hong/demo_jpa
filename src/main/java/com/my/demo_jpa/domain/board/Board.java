@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
 import com.my.demo_jpa.domain.user.User;    
 import jakarta.persistence.JoinColumn;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -45,5 +46,6 @@ public class Board {
 
     @ManyToOne
     @JoinColumn(name = "user_idx", nullable = false)
+    @JsonIgnore
     private User user;
 }
