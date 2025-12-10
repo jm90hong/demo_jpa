@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import com.my.demo_jpa.domain.board.Board;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.EnumType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -32,6 +33,7 @@ import jakarta.persistence.EnumType;
 public class User {
 
     @Id
+    @Column(nullable = false, name = "idx")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idx;
 
@@ -59,9 +61,10 @@ public class User {
     private LocalDateTime createdAt;
 
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
     @Builder.Default
     private List<Board> boards = new ArrayList<>();
    
-    
+
 }

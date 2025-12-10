@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
 import com.my.demo_jpa.domain.user.User;    
 import jakarta.persistence.JoinColumn;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.FetchType;
 
 
 @Entity
@@ -30,6 +30,7 @@ public class Board {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, name = "idx")
     private Integer idx;
 
     @Column(nullable = false, name = "title")
@@ -44,8 +45,9 @@ public class Board {
     @Column(nullable = false, updatable = false, name = "created_at")
     private LocalDateTime createdAt;
 
-    @ManyToOne
+  
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_idx", nullable = false)
-    @JsonIgnore
     private User user;
 }
